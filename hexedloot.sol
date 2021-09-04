@@ -5,7 +5,7 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 
 contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
 
-        string[] private weapons = [
+    string[] private weapons = [
         "Warhammer",
         "Quarterstaff",
         "Maul",
@@ -185,7 +185,7 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
         "of Wrath",
         "of Corruption"
     ];
-        string[] private jobs = [
+    string[] private jobs = [
 		"Animal Handler",
 		"Arborist",
 		"Beekeeper",
@@ -686,26 +686,6 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
         return output;
     }
 
-
-    function pluckJohb(uint256 tokenId, string memory keyPrefix) internal view returns (string memory) {
-        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-        string memory output = jobs[rand % jobs.length];
-        uint256 greatness = rand % 21;
-		if (greatness == 0) {
-            output = string(abi.encodePacked("Unskilled ", output));
-        } else if (greatness > 10 && greatness < 14) {
-            output = string(abi.encodePacked("Neophyte ", output));
-        } else if (greatness >= 14 && greatness < 19) {
-            output = string(abi.encodePacked("Journeyman ", output));
-        } else if (greatness >= 19) {
-            if (greatness == 19) {
-                output = string(abi.encodePacked("Expert ", output));
-            } else {
-                output = string(abi.encodePacked("Master ", output));
-            }
-        }
-        return output;
-    }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
         string[25] memory parts;
